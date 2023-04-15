@@ -1,0 +1,347 @@
+mkdir class
+pwd -- present working directory
+cd class
+pwd
+  gedit script1.sh
+ls
+cat script1.sh -- see inside the file
+  who
+  whoami
+  mkdir int301
+  cd int301
+  touch new.txt
+  cd ..
+  ls
+ls -l --permitions available
+chmod 742 script1.sh
+-- ./script1.sh  --execute
+cd int301
+ls                                             ----- Create a script file
+.......................................................................
+ 	  
+ls 
+cd class 
+gedit var1.sh
+
+   #!/bin/bash -- optional
+   var1="LPU"
+   var2=5          --- declare
+   var3= 10                 --- ERROR because of space
+   var4=university
+   echo"value of first variable var1 = $var1"  -- var call
+   echo "var2= $var2"
+   echo "var3= $var3"                 -- var calls
+   echo "var4= $var4"
+
+ls -l
+chmod 742 var1.sh
+-- ./var1.sh  --execute
+-----------------------
+output--->
+./var1.sh: line 5: 10: command not found
+value of first variable var1 = LPU
+var2= 5
+var3=
+var4= university
+......................................................................
+
+  GNU nano 6.2               
+           #!/bin/bash
+
+var1="LPU"
+var2=5
+var3=10
+var4=university
+readonly var4                   -------- using "Read-only" 
+var4="myclass"
+echo "value of first variable var1 = $var1"
+echo "var2= $var2"
+echo "var3= $var3"
+echo "var4= $var4"
+echo "$var3"
+
+-------------------
+output--->
+gaurav@Gaurav:~/class$ ./var1.sh
+./var1.sh: line 8: var4: readonly variable
+value of first variable var1 = LPU
+var2= 5
+var3= 10
+var4= university
+10
+......................................................................
+
+var1="LPU"
+unset var1                           ---------- using "unset"
+var2=5
+var3=10
+var4=university
+readonly var4
+var4="myclass"
+echo "value of first variable var1 = $var1"
+echo "var2= $var2"
+echo "var3= $var3"
+echo "var4= $var4"
+echo "$var3"
+-----------------
+output --->
+gaurav@Gaurav:~/class$ ./var1.sh
+./var1.sh: line 9: var4: readonly variable
+value of first variable var1 =            ----- defined value not visible
+var2= 5
+var3= 10
+var4= university
+10
+......................................................................
+
+gaurav@Gaurav:~/class$ touch var2.sh
+gaurav@Gaurav:~/class$ ls
+int301  script1.sh  var1.sh  var2.sh
+gaurav@Gaurav:~/class$ cp var1.sh var2.sh
+gaurav@Gaurav:~/class$ ls -l var2.sh
+-rw-r--r-- 1 gaurav gaurav 209 Jan 23 11:18 var2.sh
+gaurav@Gaurav:~/class$
+
+......................................................................
+
+gaurav@Gaurav:~/class$ cat var2.sh
+$#!/bin/bash
+
+var1="LPU"
+var2=5
+
+echo "var1 = $var1"
+printf "var1 = $var1"
+printf=("var1 = $var1")
+echo "var2= $var2"
+printf "var2 = $var2"
+printf=("var2 = $var2")
+
+------------------------------
+output ------>
+
+gaurav@Gaurav:~/class$ nano var2.sh
+gaurav@Gaurav:~/class$ chmod 742 var2.sh
+gaurav@Gaurav:~/class$ ./var2.sh
+./var2.sh: line 1: 0!/bin/bash: No such file or directory
+var1 = LPU
+var1 = LPUvar2= 5
+var2 = 5gaurav@Gaurav:~/class$
+
+------------------------------------------------------------
+
+system defined variable 
+
+
+echo "enter the name"
+read name
+echo "your name --- $name"
+
+---------------------------
+output ---> 
+
+gaurav@Gaurav:~/class$ ./var2.sh
+enter the name                   ------ enter the value 
+gaurav
+your name --- gaurav
+
+.............................................................
+
+#!/bin/bash
+
+echo "Enter the first input: $1"
+echo "Enter the second input: $2"
+echo "Enter the third input: $3"
+echo "Program is: $0"
+echo "value of the arguments passed at command line: $*"
+echo "value of the arguments passed at command line: $@"
+echo "value of the arguments passed at command line: $#"
+echo "PID of bash: $$"
+echo "Status of prevoios command: $?"
+
+--------------------------
+output ----->
+
+gaurav@Gaurav:~/class$ ./script2.sh we are new
+Enter the first input: we
+Enter the second input: are
+Enter the third input: new
+Program is: ./script2.sh
+value of the arguments passed at command line: we are new
+value of the arguments passed at command line: we are new
+value of the arguments passed at command line: 3
+PID of bash: 457
+Status of prevoios command: 0
+
+..............................................................
+
+echo "enter number"
+read a
+echo "enter another"
+read b
+c=$(($a+$b))
+echo "addition is: $c"
+d=`expr $a + $b`
+echo  "addition is: $d"
+e=$a+$b
+echo "addion err: $e"
+
+output ------>
+
+gaurav@Gaurav:~/class$ ./add.sh
+enter number
+20
+enter another
+30
+addition is: 50
+addition is: 50
+addion err: 20+30
+
+..............................................................
+
+                                 -------- division
+echo "enter number"
+read a
+echo "enter another"
+read b
+c=$(($a+$b))
+echo "addition is: $c"
+d=$(($a/$b))
+echo  "division is: $d"
+
+output ------------>
+gaurav@Gaurav:~/class$ ./script3.sh
+enter number
+2
+enter another
+3
+addition is: 5
+division is: 0            -----error 
+
+to resolve this 
+
+echo "div is: "
+echo  "scale=2; $a / $b" | bc       --- basic calclator used 
+
+0utput -------------->
+
+gaurav@Gaurav:~/class$ ./script3.sh
+enter number
+2
+enter another
+3
+addition is: 5
+div is:
+.66
+............................................................
+
+if [ $# -gt 5 ]
+then
+echo "too many argu"
+else
+echo " all passed argu"
+echo "$*"
+fi
+
+output -------------->
+gaurav@Gaurav:~/class$ ./script4.sh 545 454
+ all passed argu
+545 454
+gaurav@Gaurav:~/class$ ./script4.sh 545 454
+ all passed argu
+545 454
+.............................................................
+
+
+..............................................................
+
+gaurav@Gaurav:~/class$ cat script4.sh
+mkdir $2
+cd $2
+touch $1
+                                         --------Question
+Output --------->
+
+gaurav@Gaurav:~/class$ ./script4.sh file.txt a   ---- 1 & 2 i/p
+gaurav@Gaurav:~/class$ ls
+a       int301      script2.sh  script4.sh  var2.sh
+add.sh  script1.sh  script3.sh  var1.sh
+gaurav@Gaurav:~/class$ cd a
+gaurav@Gaurav:~/class/a$ ls
+file.txt
+................................................................
+
+echo "enter dir A name : "
+read a
+echo "enter dir B name : "
+read b
+echo "enter file A name : "
+read c
+echo "enter file B name : "
+read d
+mkdir $a
+cd $a
+mkdir $b
+cd $b
+touch $c
+touch $d
+
+output ----------->
+
+gaurav@Gaurav:~/class$ ./script4.sh
+enter dir A name :
+a
+enter dir B name :
+b
+enter file A name :
+a.txt
+enter file B name :
+b.txt
+ 
+gaurav@Gaurav:~/class$ cd a
+gaurav@Gaurav:~/class/a$ ls
+b  file.txt
+gaurav@Gaurav:~/class/a$ ls b
+a.txt  b.txt
+...............................................................
+
+-------------------- LOOPS 
+
+echo "enter first number : "
+read a
+echo "enter second number : "
+read b
+
+if [ $a -lt $b ]
+then
+echo "B is greater"
+else
+echo "A is greater"
+fi
+ 
+Output ----------------->
+
+gaurav@Gaurav:~/class$ ./script4.sh
+enter first number :
+5
+enter second number :
+9
+B is greater
+..............................................................
+
+if [ $# -gt 5 ]
+then
+echo "too many argu"
+else
+echo " all passed argu"
+echo "$*"
+fi
+output --------------------->
+gaurav@Gaurav:~/class$ ./script4.sh 545 454 54 54
+ all passed argu
+545 454 54 54
+
+gaurav@Gaurav:~/class$ ./script4.sh 545 454 54 54 56 212 212
+too many argu
+..............................................................
+

@@ -1,0 +1,135 @@
+***********************************************************************************Basic Linux Commands********************************************************************
+1.) pwd --> The pwd command is used to display the location of the current working directory
+
+2.) mkdir ---> The mkdir command is used to create a new directory under any directory.
+ex- mkdir<filename>
+
+3.) rmdir --> The rmdir command is used to delete a directory.
+  ex -  rmdir <filename>
+4.) ls --> The ls command is used to display a list of content of a directory.
+
+5.) cd ---> The cd command is used to change the current directory
+   ex- cd <directory name>
+# for exit current directory use cd ..
+
+6.) touch --> The touch command is used to create empty files. We can create multiple empty files by executing it once.
+ ex- touch < file1 name>  or touch <file1> <file2>
+
+7.) cat --> The cat command is a multi-purpose utility in the Linux system. It can be used to create a file, display content of the file, copy the content of one file to another file, and more.
+
+ex- cat  > <file name>  ---> enter content --->  ctrl + d save file --->  display the content <cat filename>
+
+8.) rm --> The rm command is used to remove a file.
+ ex - rm <filename>
+
+9.) cp--> The cp command is used to copy a file or directory.
+
+cp <existing filename> <newfilename> 
+
+10.) mv --> The mv command is used to move a file or a directory form one location to another location.
+
+ex - mv <file name> <directory path> 
+
+ 11.) rename --> The rename command is used to rename files. It is useful for renaming a large group of files.
+ ex- rename 's/old-name/new-name/' files 
+ 
+# convert all the text files into pdf files, 
+
+ command--> rename 's/\.txt$/\.pdf/' *.txt  
+
+******************************three kinds of permissions in linux************************************
+Read (r): Allows a user or group to view a file.
+Write (w): Permits the user to write or modify a file or directory.
+Execute (x): A user or grup with execute permissions can execute a file or view a directory
+
+*****************************To change directory permissions in Linux*********************************************
+
+a.) chmod +rwx   filename to add permissions
+b.) chmod -rwx directoryname to remove permissions. 
+c)  chmod +x filename to allow executable permissions.
+d.) chmod -wx filename to take out write and executable permissions.
+
+
+*********************************************************************Shell Scripting*****************************************************************
+.The shell is a command-line interpreter for Linux and Unix systems. It provides an interface between the user and the kernel and executes commands.
+ .A sequence of commands can be written in a file for execution in the shell. It is called shell scripting. It helps to automate tasks in Linux.
+
+## Scripting language also has concepts of different types of variables like procedural or object-oriented languages.
+--> In shell scripting there are three main types of variables are present. They are –
+. Local Variables 
+. Global Variables or Environment Variables
+. Shell Variables or System Variables
+
+****************************************************shell Scripting function******************************************
+
+A function is a block of code that is reusable and performs certain operations. Like any other programming language, Shell-Scripting also supports functions.
+
+***********************************************************Local Variables*******************************************************************
+
+A local variable is a special type of variable which has its scope only within a specific function or block of code. Local variables can override the same variable name in the larger scope.
+
+ex--->
+#!/bin/sh
+
+getName(){     // function name  
+NAME=anil  #local variable
+echo "$NAME (from function)"   #valid if called using function
+}
+
+echo "$NAME - (outside function)" #invalid here 
+getName 
+
+*******************************************************************Global Variable ***********************************************************************************
+A global variable is a variable with global scope. It is accessible throughout the program. Global variables are declared outside any block of code or function.
+
+*******code***
+#!/bin/sh
+
+NAME=SATYAJIT #global variable
+
+getName(){
+echo "$NAME (from function)" 
+}
+
+echo "$NAME - (outside function)" 
+getName 
+
+********** export commmand using code *************************************
+
+## file1)    nano file.sh --->
+   #code 
+#!/bin/sh
+NUM=9
+echo "file1 : The value is $NUM"
+export NUM // here we are exporting this num in another file 
+./file2.sh  // another filename where i am exporting num  
+ 
+ # file2)  file2.sh
+#code 
+#!/bin/sh
+echo "file2 : The value is $NUM"
+
+
+********************************************************Shell Variable ******************************************************************
+These are special types of variables. They are created and maintained by Linux Shell itself.
+ These variables are required by the shell to function properly  They are defined in Capital letters and to see all of them, we can use set / env / printenv command.
+
+#Variable Name	#Description	                                                        #Usage
+BASH_VERSION 	Holds the version of this instance of bash.	echo $BASH_VERSION
+HOME	                  Provides a home directory of the current user.	echo $HOME
+HOSTNAME	Provides computer name	                                   echo $HOSTNAME
+USERNAME	Provides username	                                                     echo $USERNAME
+
+
+
+
+ 
+
+
+
+
+
+
+
+
+
